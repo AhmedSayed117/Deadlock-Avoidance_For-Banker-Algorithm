@@ -141,33 +141,6 @@ depend:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles\1.dir\build.make CMakeFiles/1.dir/build
 .PHONY : 1/fast
 
-Steps.obj: Steps.cpp.obj
-
-.PHONY : Steps.obj
-
-# target to build an object file
-Steps.cpp.obj:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\1.dir\build.make CMakeFiles/1.dir/Steps.cpp.obj
-.PHONY : Steps.cpp.obj
-
-Steps.i: Steps.cpp.i
-
-.PHONY : Steps.i
-
-# target to preprocess a source file
-Steps.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\1.dir\build.make CMakeFiles/1.dir/Steps.cpp.i
-.PHONY : Steps.cpp.i
-
-Steps.s: Steps.cpp.s
-
-.PHONY : Steps.s
-
-# target to generate assembly for a file
-Steps.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles\1.dir\build.make CMakeFiles/1.dir/Steps.cpp.s
-.PHONY : Steps.cpp.s
-
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -204,9 +177,6 @@ help:
 	@echo ... edit_cache
 	@echo ... rebuild_cache
 	@echo ... 1
-	@echo ... Steps.obj
-	@echo ... Steps.i
-	@echo ... Steps.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

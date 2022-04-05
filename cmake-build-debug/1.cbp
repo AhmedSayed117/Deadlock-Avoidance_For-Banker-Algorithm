@@ -83,12 +83,6 @@
 		<Unit filename="A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/Banker.h">
 			<Option target="1"/>
 		</Unit>
-		<Unit filename="A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/Steps.cpp">
-			<Option target="1"/>
-		</Unit>
-		<Unit filename="A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/Steps.h">
-			<Option target="1"/>
-		</Unit>
 		<Unit filename="A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/main.cpp">
 			<Option target="1"/>
 		</Unit>
