@@ -4,8 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "A:/CS/3 Second/Adv Operating system/Assignments/1/Steps.cpp" "A:/CS/3 Second/Adv Operating system/Assignments/1/cmake-build-debug/CMakeFiles/1.dir/Steps.cpp.obj"
-  "A:/CS/3 Second/Adv Operating system/Assignments/1/main.cpp" "A:/CS/3 Second/Adv Operating system/Assignments/1/cmake-build-debug/CMakeFiles/1.dir/main.cpp.obj"
+  "A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/Steps.cpp" "A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/cmake-build-debug/CMakeFiles/1.dir/Steps.cpp.obj"
+  "A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/main.cpp" "A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/cmake-build-debug/CMakeFiles/1.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -61,10 +61,10 @@ RM = "C:\Program Files\JetBrains\CLion 2021.1.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "A:\CS\3 Second\Adv Operating system\Assignments\1"
+CMAKE_SOURCE_DIR = "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug"
+CMAKE_BINARY_DIR = "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/1.dir/depend.make
@@ -77,29 +77,29 @@ include CMakeFiles/1.dir/flags.make
 
 CMakeFiles/1.dir/main.cpp.obj: CMakeFiles/1.dir/flags.make
 CMakeFiles/1.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/1.dir/main.cpp.obj"
-	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\1.dir\main.cpp.obj -c "A:\CS\3 Second\Adv Operating system\Assignments\1\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/1.dir/main.cpp.obj"
+	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\1.dir\main.cpp.obj -c "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\main.cpp"
 
 CMakeFiles/1.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/1.dir/main.cpp.i"
-	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "A:\CS\3 Second\Adv Operating system\Assignments\1\main.cpp" > CMakeFiles\1.dir\main.cpp.i
+	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\main.cpp" > CMakeFiles\1.dir\main.cpp.i
 
 CMakeFiles/1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/1.dir/main.cpp.s"
-	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "A:\CS\3 Second\Adv Operating system\Assignments\1\main.cpp" -o CMakeFiles\1.dir\main.cpp.s
+	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\main.cpp" -o CMakeFiles\1.dir\main.cpp.s
 
 CMakeFiles/1.dir/Steps.cpp.obj: CMakeFiles/1.dir/flags.make
 CMakeFiles/1.dir/Steps.cpp.obj: ../Steps.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/1.dir/Steps.cpp.obj"
-	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\1.dir\Steps.cpp.obj -c "A:\CS\3 Second\Adv Operating system\Assignments\1\Steps.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/1.dir/Steps.cpp.obj"
+	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\1.dir\Steps.cpp.obj -c "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\Steps.cpp"
 
 CMakeFiles/1.dir/Steps.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/1.dir/Steps.cpp.i"
-	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "A:\CS\3 Second\Adv Operating system\Assignments\1\Steps.cpp" > CMakeFiles\1.dir\Steps.cpp.i
+	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\Steps.cpp" > CMakeFiles\1.dir\Steps.cpp.i
 
 CMakeFiles/1.dir/Steps.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/1.dir/Steps.cpp.s"
-	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "A:\CS\3 Second\Adv Operating system\Assignments\1\Steps.cpp" -o CMakeFiles\1.dir\Steps.cpp.s
+	F:\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\Steps.cpp" -o CMakeFiles\1.dir\Steps.cpp.s
 
 # Object files for target 1
 1_OBJECTS = \
@@ -115,7 +115,7 @@ CMakeFiles/1.dir/Steps.cpp.s: cmake_force
 1.exe: CMakeFiles/1.dir/linklibs.rsp
 1.exe: CMakeFiles/1.dir/objects1.rsp
 1.exe: CMakeFiles/1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable 1.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable 1.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\1.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -128,6 +128,6 @@ CMakeFiles/1.dir/clean:
 .PHONY : CMakeFiles/1.dir/clean
 
 CMakeFiles/1.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "A:\CS\3 Second\Adv Operating system\Assignments\1" "A:\CS\3 Second\Adv Operating system\Assignments\1" "A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug" "A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug" "A:\CS\3 Second\Adv Operating system\Assignments\1\cmake-build-debug\CMakeFiles\1.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm" "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm" "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug" "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug" "A:\CS\3 Second\Adv Operating system\Assignments\1\Deadlock-Avoidance_For-Banker-Algorithm\cmake-build-debug\CMakeFiles\1.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/1.dir/depend
 

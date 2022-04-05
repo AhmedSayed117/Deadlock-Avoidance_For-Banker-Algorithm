@@ -1,4 +1,4 @@
-# Install script for directory: A:/CS/3 Second/Adv Operating system/Assignments/1
+# Install script for directory: A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "A:/CS/3 Second/Adv Operating system/Assignments/1/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "A:/CS/3 Second/Adv Operating system/Assignments/1/Deadlock-Avoidance_For-Banker-Algorithm/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
