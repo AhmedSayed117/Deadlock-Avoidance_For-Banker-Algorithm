@@ -58,7 +58,7 @@ Banker::~Banker() {
 void Banker::calcNeed() const {
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            need[i][j] = Maximum[i][j] - allocated[i][j];
+            need[i][j] = abs(Maximum[i][j] - allocated[i][j]);
         }
     }
 }
@@ -131,18 +131,14 @@ bool Banker::CheckSafeState() {
             finish[index] = true;
             q.pop();
             Current = 0;
-            index++;
         }
         else
         {
             Current++;
-            index++;
-            if (index == n )index=0;
-            if(Current==q.size()+1)break;//base case
-            continue;
         }
+        index++;
         if (index == n )index=0;
-        if(Current==q.size())break;//base case
+        if(Current==q.size()+1)break;//base case
     }
 
     if(CheckFinish()){
