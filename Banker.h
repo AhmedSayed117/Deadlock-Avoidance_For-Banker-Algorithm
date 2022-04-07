@@ -143,8 +143,7 @@ bool Banker::CheckSafeState() {
         if (index == n )index=0;
         if(Current == q.size())break;//base case
     }
-
-
+////////////////////
     if(CheckFinish()){
         return true;
     } else return false;
@@ -181,22 +180,18 @@ void Banker::Request(int NumberOfP,int *arr) {
                 b.Maximum[i][j]= Maximum[i][j];
             }
         }
-
-        for (int i = 0; i < n; i++) {
-            b.finish[i] = false;
+        for (int i = 0; i < m; i++) {
+            b.work[i] = work[i];
         }
-
-
+        for (int i = 0; i < n; i++) {
+            b.finish[i] = finish[i];
+        }
 
         for (int i = 0; i < m; i++) {
             b.allocated[NumberOfP][i]+=arr[i];
             b.need[NumberOfP][i]= abs(arr[i]-b.need[NumberOfP][i]);
             b.work[i]= abs(arr[i]-b.work[i]);
         }
-        for (int i = 0; i < m; i++) {
-            b.work[i] = work[i];
-        }
-
 
 
         if (b.CheckSafeState()){
@@ -208,20 +203,12 @@ void Banker::Request(int NumberOfP,int *arr) {
                 }
             }
             for (int i = 0; i < m; i++) {
-                work[i] = b.work[i];
+                work[i] = b.work[i];//////
             }
-
-//            for (int i = 0; i < n; i++) {
-//                finish[i] = b.finish[i];
-//            }
 
             for (int i = 0; i < n; i++) {
-                b.finish[i] = false;
+                finish[i] = b.finish[i];
             }
-
-//            for (int i = 0; i < m; i++) {
-//                work[i] = available[i];
-//            }
             cout<<"process " <<NumberOfP <<" added and the System will be in Safe State\n";
         }else cout<<"Request denied Because process "<<NumberOfP<<" Will Make The System In UnSafe State\n";
     }
