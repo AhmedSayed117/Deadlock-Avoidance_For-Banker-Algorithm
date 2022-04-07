@@ -1,16 +1,22 @@
-using namespace std;
+#include <algorithm>
+#include "iostream"
 #include "queue"
+#include "vector"
+using namespace std;
 
 class Banker{
     int n,m; // n --> p  // m --> R
     int *available;
     int *work;
     bool *finish;
+    int* victim;
 
     int **Maximum;
     int **allocated;
     int **need;
+
 public:
+    queue<int> priority;
     void calcNeed() const;
     void displayNeed() const;
     void Read();
@@ -18,10 +24,14 @@ public:
 
     void display();
     bool ValidRequest(int,const int*);
-    void Request(int,int*);
+    bool ValidRelease(int,const int*);
+    bool Request(int,int*);
+    void Release(int,int*);
     bool CheckFinish();
     bool isFull();//work = available
     bool CheckSafeState();
+
+    void Recovery(int*);
     Banker(int,int);
     ~Banker();
 };
@@ -31,7 +41,7 @@ Banker::Banker(int row, int col) {
         available = new int[m];
         work = new int[m];
         finish = new bool[n];
-
+        victim = new int[n];
         Maximum = new int*[n];
         allocated = new int*[n];
         need = new int*[n];
@@ -40,6 +50,8 @@ Banker::Banker(int row, int col) {
             Maximum[i] = new int[m];
             allocated[i] = new int[m];
             need[i] = new int[m];
+            finish[i] = false;
+            victim[i] = -1;
         }
 }
 
@@ -47,6 +59,7 @@ Banker::~Banker() {
         delete []available;
         delete []work;
         delete []finish;
+        delete []victim;
         for (int i = 0; i < n; i++) {
             delete[] Maximum[i];
             delete[] allocated[i];
@@ -101,19 +114,16 @@ void Banker::Read(){
         available[i] = num;
     }
 
-    for (int i = 0; i < n; i++) {
-        finish[i] = false;
-    }
 
     for (int i = 0; i < m; i++) {
         work[i] = available[i];
     }
 
-    for(int i = 0; i < n; i++){
-        for(int j = 0; j < m; j++) {
-        available[j]+=allocated[i][j];
-        }
-    }
+//    for(int i = 0; i < n; i++){
+//        for(int j = 0; j < m; j++) {
+//        available[j]+=allocated[i][j];
+//        }
+//    }
 
 }
 
@@ -132,21 +142,66 @@ bool Banker::CheckSafeState() {
             }
 
             finish[index] = true; // 0 3
-            q.pop(); // 1 2 3 4
+            cout<<"process : "<<index<<" Finished In The System\n";
+            victim[index]=index;//-1 1 2 -1 4
+            q.pop(); // 0 1 2 3 4
             Current = 0; // 0
         }
         else
         {
             Current++;//2
         }
+
         index++;// 3
         if (index == n )index=0;
         if(Current == q.size())break;//base case
     }
-////////////////////
-    if(CheckFinish()){
+
+//    cout<<"available\n";
+//    for (int i = 0; i < m; i++) {
+//        cout<<work[i]<<" ";
+//    }
+//    cout<<"\n\n\n";
+
+    for (int i = 0; i < m; i++) {
+        work[i] = available[i];
+    }
+
+
+    /////////////////////   arr = 0 1 2 3 4    victim =  4 0
+
+    int arr[n];// 0 1 2 3 4      -1 -1 2 -1 4
+    for (int j = 0; j < n; j++) {
+        arr[j] = j;
+    }
+    for (int i = 0; i < n; i++) {
+        if (victim[i]==arr[i]){
+            victim[i] = -1;// 1212 1 121 1212
+        } else{
+            victim[i] = arr[i];
+            priority.push(victim[i]);
+        }
+    }
+
+
+    ////////////////////////////
+
+    if(CheckFinish())
+    {
+        for (int i = 0; i < n; i++)
+        {
+            finish[i] = false;
+        }
         return true;
-    } else return false;
+    }
+    else
+    {
+        for (int i = 0; i < n; i++)
+        {
+            finish[i] = false;
+        }
+        return false;
+    }
 }
 
 bool Banker::isFull() {
@@ -170,7 +225,7 @@ bool Banker::CheckFinish() {
     return true;
 }
 
-void Banker::Request(int NumberOfP,int *arr) {
+bool Banker::Request(int NumberOfP,int *arr) {
     if (ValidRequest(NumberOfP,arr)){
         Banker b(n,m);
         for (int i = 0; i < n; i++) {
@@ -181,16 +236,20 @@ void Banker::Request(int NumberOfP,int *arr) {
             }
         }
         for (int i = 0; i < m; i++) {
-            b.work[i] = work[i];
+            b.available[i] = available[i]; //
         }
-        for (int i = 0; i < n; i++) {
-            b.finish[i] = finish[i];
-        }
+//        for (int i = 0; i < n; i++) {
+//            b.finish[i] = finish[i];
+//        }
 
         for (int i = 0; i < m; i++) {
             b.allocated[NumberOfP][i]+=arr[i];
             b.need[NumberOfP][i]= abs(arr[i]-b.need[NumberOfP][i]);
-            b.work[i]= abs(arr[i]-b.work[i]);
+            b.work[i]= abs(arr[i]-b.available[i]);
+        }
+        int * temp = new int[m];
+        for (int i = 0; i < m; i++) {
+            temp[i] = b.work[i];
         }
 
 
@@ -203,16 +262,30 @@ void Banker::Request(int NumberOfP,int *arr) {
                 }
             }
             for (int i = 0; i < m; i++) {
-                work[i] = b.work[i];//////
+                available[i] = temp[i];//////
             }
+//            cout<<"temp\n";
+//            for (int i = 0; i < m; i++) {
+//                cout<<temp[i]<<" ";
+//            }
+//            cout<<"\n\n\n";
 
             for (int i = 0; i < n; i++) {
-                finish[i] = b.finish[i];
+                finish[i] = false;
             }
-            cout<<"process " <<NumberOfP <<" added and the System will be in Safe State\n";
-        }else cout<<"Request denied Because process "<<NumberOfP<<" Will Make The System In UnSafe State\n";
+            cout<<"process added and the System will be in Safe State\n";
+//            display();
+            return true;
+        }else {
+            cout<<"Request denied Because process Will Make The System In UnSafe \n";
+            return false;
+        }
     }
-    else cout<<"Request denied Because process "<<NumberOfP<<" Will Make The System In UnSafe State\n";
+    else{
+        cout<<"Request Invalid Because process "<<NumberOfP<< " Will Make The System In UnSafe State\n";
+//        display();
+        return false;
+    }
 }
 
 bool Banker::ValidRequest(int p,const int* Request) {
@@ -234,14 +307,54 @@ void Banker::display() {
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            cout<<Maximum[i][j]<<" ";
+            cout<<need[i][j]<<" ";
         }
         cout<<"\n";
     }
     cout<<"\n";
     for (int i = 0; i < m; i++) {
-        cout<<work[i]<<" ";
+        cout<<available[i]<<" ";
     }
 
 
+}
+
+void Banker::Release(int NumberOfP, int *Release) {
+    if (ValidRelease(NumberOfP,Release)){
+        for (int i = 0; i < m; i++) {
+            allocated[NumberOfP][i] = abs(allocated[NumberOfP][i] - Release[i]);
+//            need[NumberOfP][i] += Release[i];
+            available[i] += Release[i];
+        }
+    }
+//    display();
+}
+
+bool Banker::ValidRelease(int p , const int * Release) {
+    for (int i = 0; i < m; i++) {
+        if (Release[i] > allocated[p][i]) return false;
+    }
+    return true;
+}
+
+void Banker::Recovery(int * R) {
+    int process = priority.front();//اللي دخلوا
+    int check =0;
+    while (!priority.empty() && !Request(process,R)){
+        if (check!=0){
+            Release(process,R);
+            if (!priority.empty()){
+                priority.pop();
+            }
+            process = priority.front();
+        } else{
+            Release(process,R);
+            check++;
+            if (!priority.empty()){
+                priority.pop();
+                process = priority.front();
+            }
+        }
+
+    }
 }
