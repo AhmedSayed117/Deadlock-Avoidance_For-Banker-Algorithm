@@ -13,10 +13,12 @@ class Banker{
 public:
     void calcNeed() const;
     void displayNeed() const;
-//    void displayAvailable() const;
     void Read();
     bool CheckAllocation(int);// NeedLessThanOrEqualWork
 
+    void display();
+    bool ValidRequest(int,const int*);
+    void Request(int,int*);
     bool CheckFinish();
     bool isFull();//work = available
     bool CheckSafeState();
@@ -117,29 +119,31 @@ void Banker::Read(){
 
 bool Banker::CheckSafeState() {
     queue <int> q;
-    for (int i = 0; i < n; i++)q.push(i);
-    int index = q.front();
-    int Current=0;
+    for (int i = 0; i < n; i++)q.push(i);// 0 1 2 3 4
+    int index = q.front(); //0
+    int Current=0; //0
 
     while(!q.empty()){
-        if(!finish[index] && CheckAllocation(index)){
+        if (finish[index]){}
+        else if(!finish[index] && CheckAllocation(index)){
 
             for (int i = 0; i < m; i++) {
-                work[i]+=allocated[index][i];
+                work[i]+=allocated[index][i]; // 3 3 2
             }
 
-            finish[index] = true;
-            q.pop();
-            Current = 0;
+            finish[index] = true; // 0 3
+            q.pop(); // 1 2 3 4
+            Current = 0; // 0
         }
         else
         {
-            Current++;
+            Current++;//2
         }
-        index++;
+        index++;// 3
         if (index == n )index=0;
-        if(Current==q.size()+1)break;//base case
+        if(Current == q.size())break;//base case
     }
+
 
     if(CheckFinish()){
         return true;
@@ -155,7 +159,7 @@ bool Banker::isFull() {
 
 bool Banker::CheckAllocation(int index) {
     for (int i = 0; i < m; i++) {
-        if (need[index][i]>work[i]) return false;
+        if (need[index][i]>work[i]) return false; // 0 1 1       3 4 2
     }
     return true;
 }
@@ -167,10 +171,90 @@ bool Banker::CheckFinish() {
     return true;
 }
 
-//void Banker::displayAvailable() const {
-//    for (int j = 0; j < m; j++) {
-//        cout << available[j] << " ";
-//    }
-//}
+void Banker::Request(int NumberOfP,int *arr) {
+    if (ValidRequest(NumberOfP,arr)){
+        Banker b(n,m);
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                b.allocated[i][j] = allocated[i][j];
+                b.need[i][j] = need[i][j];
+                b.Maximum[i][j]= Maximum[i][j];
+            }
+        }
 
-//dEV
+        for (int i = 0; i < n; i++) {
+            b.finish[i] = false;
+        }
+
+
+
+        for (int i = 0; i < m; i++) {
+            b.allocated[NumberOfP][i]+=arr[i];
+            b.need[NumberOfP][i]= abs(arr[i]-b.need[NumberOfP][i]);
+            b.work[i]= abs(arr[i]-b.work[i]);
+        }
+        for (int i = 0; i < m; i++) {
+            b.work[i] = work[i];
+        }
+
+
+
+        if (b.CheckSafeState()){
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    allocated[i][j] = b.allocated[i][j];
+                    need[i][j] = b.need[i][j];
+                    Maximum[i][j]= b.Maximum[i][j];
+                }
+            }
+            for (int i = 0; i < m; i++) {
+                work[i] = b.work[i];
+            }
+
+//            for (int i = 0; i < n; i++) {
+//                finish[i] = b.finish[i];
+//            }
+
+            for (int i = 0; i < n; i++) {
+                b.finish[i] = false;
+            }
+
+//            for (int i = 0; i < m; i++) {
+//                work[i] = available[i];
+//            }
+            cout<<"process " <<NumberOfP <<" added and the System will be in Safe State\n";
+        }else cout<<"Request denied Because process "<<NumberOfP<<" Will Make The System In UnSafe State\n";
+    }
+    else cout<<"Request denied Because process "<<NumberOfP<<" Will Make The System In UnSafe State\n";
+}
+
+bool Banker::ValidRequest(int p,const int* Request) {
+    for (int i = 0; i < m; i++) {
+        if (Request[i]>need[p][i]) return false;
+        else if(Request[i]>available[i]) return false;
+    }
+    return true;
+}
+
+void Banker::display() {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout<<allocated[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            cout<<Maximum[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
+    cout<<"\n";
+    for (int i = 0; i < m; i++) {
+        cout<<work[i]<<" ";
+    }
+
+
+}

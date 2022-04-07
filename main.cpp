@@ -10,7 +10,9 @@ int main() {
     b.Read();
     b.calcNeed();
     b.displayNeed();
-    if (b.CheckSafeState()){
-        cout<<"Safe Staaaaaaaaaaaaaaaaaaaaaaaaaaaaate\n";
-    } else  cout<<"Not Safe Staaaaaaaaaaaaaaaaaaaaaaaaaaaaate\n";
+    int arr[3] ={1,0,2};
+
+    b.Request(1,arr);
+    int arr2[3] ={3,2,2};
+    b.Request(0,arr2);
 }
