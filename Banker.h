@@ -1,7 +1,6 @@
 #include <algorithm>
 #include "iostream"
 #include "queue"
-#include "vector"
 using namespace std;
 
 class Banker{
@@ -10,7 +9,6 @@ class Banker{
     int *work;
     bool *finish;
     int* victim;
-
     int **Maximum;
     int **allocated;
     int **need;
@@ -28,10 +26,8 @@ public:
     bool Request(int,int*);
     void Release(int,int*);
     bool CheckFinish();
-    bool isFull();//work = available
     bool CheckSafeState();
-
-    void Recovery(int*);
+    void Recovery();
     Banker(int,int);
     ~Banker();
 };
@@ -118,13 +114,6 @@ void Banker::Read(){
     for (int i = 0; i < m; i++) {
         work[i] = available[i];
     }
-
-//    for(int i = 0; i < n; i++){
-//        for(int j = 0; j < m; j++) {
-//        available[j]+=allocated[i][j];
-//        }
-//    }
-
 }
 
 bool Banker::CheckSafeState() {
@@ -157,18 +146,9 @@ bool Banker::CheckSafeState() {
         if(Current == q.size())break;//base case
     }
 
-//    cout<<"available\n";
-//    for (int i = 0; i < m; i++) {
-//        cout<<work[i]<<" ";
-//    }
-//    cout<<"\n\n\n";
-
     for (int i = 0; i < m; i++) {
         work[i] = available[i];
     }
-
-
-    /////////////////////   arr = 0 1 2 3 4    victim =  4 0
 
     int arr[n];// 0 1 2 3 4      -1 -1 2 -1 4
     for (int j = 0; j < n; j++) {
@@ -182,9 +162,6 @@ bool Banker::CheckSafeState() {
             priority.push(victim[i]);
         }
     }
-
-
-    ////////////////////////////
 
     if(CheckFinish())
     {
@@ -204,16 +181,9 @@ bool Banker::CheckSafeState() {
     }
 }
 
-bool Banker::isFull() {
-    for (int i = 0; i < m; i++) {
-       if (work[i] != available[i])return false;
-    }
-    return true;
-}
-
 bool Banker::CheckAllocation(int index) {
     for (int i = 0; i < m; i++) {
-        if (need[index][i]>work[i]) return false; // 0 1 1       3 4 2
+        if (need[index][i]>work[i]) return false;
     }
     return true;
 }
@@ -227,6 +197,7 @@ bool Banker::CheckFinish() {
 
 bool Banker::Request(int NumberOfP,int *arr) {
     if (ValidRequest(NumberOfP,arr)){
+        cout<<"Request valid Because process "<<NumberOfP<< " Will Make The System In Safe State\n";
         Banker b(n,m);
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < m; j++) {
@@ -236,12 +207,8 @@ bool Banker::Request(int NumberOfP,int *arr) {
             }
         }
         for (int i = 0; i < m; i++) {
-            b.available[i] = available[i]; //
+            b.available[i] = available[i];
         }
-//        for (int i = 0; i < n; i++) {
-//            b.finish[i] = finish[i];
-//        }
-
         for (int i = 0; i < m; i++) {
             b.allocated[NumberOfP][i]+=arr[i];
             b.need[NumberOfP][i]= abs(arr[i]-b.need[NumberOfP][i]);
@@ -252,7 +219,6 @@ bool Banker::Request(int NumberOfP,int *arr) {
             temp[i] = b.work[i];
         }
 
-
         if (b.CheckSafeState()){
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
@@ -262,19 +228,12 @@ bool Banker::Request(int NumberOfP,int *arr) {
                 }
             }
             for (int i = 0; i < m; i++) {
-                available[i] = temp[i];//////
+                available[i] = temp[i];
             }
-//            cout<<"temp\n";
-//            for (int i = 0; i < m; i++) {
-//                cout<<temp[i]<<" ";
-//            }
-//            cout<<"\n\n\n";
 
             for (int i = 0; i < n; i++) {
                 finish[i] = false;
             }
-            cout<<"process added and the System will be in Safe State\n";
-//            display();
             return true;
         }else {
             cout<<"Request denied Because process Will Make The System In UnSafe \n";
@@ -283,7 +242,6 @@ bool Banker::Request(int NumberOfP,int *arr) {
     }
     else{
         cout<<"Request Invalid Because process "<<NumberOfP<< " Will Make The System In UnSafe State\n";
-//        display();
         return false;
     }
 }
@@ -297,13 +255,14 @@ bool Banker::ValidRequest(int p,const int* Request) {
 }
 
 void Banker::display() {
+    cout<<"matrix of allocation\n";
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
             cout<<allocated[i][j]<<" ";
         }
         cout<<"\n";
     }
-    cout<<"\n";
+    cout<<"matrix of need\n";
 
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
@@ -311,12 +270,11 @@ void Banker::display() {
         }
         cout<<"\n";
     }
-    cout<<"\n";
+    cout<<"matrix of available\n";
     for (int i = 0; i < m; i++) {
         cout<<available[i]<<" ";
     }
-
-
+    cout<<"\n";
 }
 
 void Banker::Release(int NumberOfP, int *Release) {
@@ -327,34 +285,54 @@ void Banker::Release(int NumberOfP, int *Release) {
             available[i] += Release[i];
         }
     }
-//    display();
 }
 
 bool Banker::ValidRelease(int p , const int * Release) {
     for (int i = 0; i < m; i++) {
-        if (Release[i] > allocated[p][i]) return false;
+        if (Release[i] > allocated[p][i]) {
+            return false;
+        }
     }
     return true;
 }
 
-void Banker::Recovery(int * R) {
-    int process = priority.front();//اللي دخلوا
+void Banker::Recovery() {
+    int process = priority.front();//
     int check =0;
-    while (!priority.empty() && !Request(process,R)){
+    int arr[m];
+    for (int i = 0; i < m; i++) {
+        arr[i] = allocated[process][i];
+    }
+    while (!priority.empty() && !Request(process,arr)){
+        cout<<"process "<<process<<" that request System will cause deadLock and the system try recover it\n";
         if (check!=0){
-            Release(process,R);
+
+            for (int i = 0; i < m; i++) {
+                allocated[process][i] = abs(allocated[process][i] - arr[i]);
+//              need[NumberOfP][i] += Release[i];
+                available[i] += arr[i];
+            }
             if (!priority.empty()){
                 priority.pop();
             }
             process = priority.front();
+            for (int i = 0; i < m; i++) {
+                arr[i] = allocated[process][i];
+            }
         } else{
-            Release(process,R);
+            for (int i = 0; i < m; i++) {
+                allocated[process][i] = abs(allocated[process][i] - arr[i]);
+//              need[NumberOfP][i] += Release[i];
+                available[i] += arr[i];
+            }
             check++;
             if (!priority.empty()){
                 priority.pop();
                 process = priority.front();
+                for (int i = 0; i < m; i++) {
+                    arr[i] = allocated[process][i];
+                }
             }
         }
-
     }
 }
